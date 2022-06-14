@@ -1,0 +1,27 @@
+.container {
+  padding: 2rem 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #2b2f54;
+  border-radius: 0.5rem;
+  & h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #696969;
+  }
+  & span {
+    margin: 1rem 0;
+    font-size: 3rem;
+  }
+  & small {
+    font-size: 1rem;
+  }
+  &__green {
+    color: #81cca6;
+  }
+  &__red {
+    color: red;
+  }
+}
