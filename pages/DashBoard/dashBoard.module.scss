@@ -1,27 +1,31 @@
 @import "../../styles/mixin";
 
 .main {
-  @include container(15%);
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+  background: rgb(192, 191, 191) none repeat scroll 0% 0%;
   &__section {
+    margin: 1rem;
     padding: 2rem 0;
-    width: 100%;
+    width: 95%;
+    background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 2px 0px,
       rgba(0, 0, 0, 0.2) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
     border-radius: 5px;
+    &__filters {
+      width: fit-content;
+    }
     &_titles {
       text-align: center;
     }
     &_cards {
       width: 100%;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: center;
       gap: 2rem;
     }
   }
