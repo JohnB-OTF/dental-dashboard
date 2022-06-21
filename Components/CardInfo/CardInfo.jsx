@@ -1,16 +1,23 @@
 //styles
 import styles from "./cardInfo.module.scss"
 
-const CardInfo = ({ title, value, percent }) => {
-  return (
-    <div className={styles.container}>
-      <h3>{title}</h3>
-      <span>{value}</span>
+//libraries
+import { useState } from "react"
 
-      {Number(percent) > 0 ? (
-        <small className={styles.container__green}>{percent}%</small>
+const CardInfo = ({ key, data }) => {
+  const [info, setInfo] = useState(data !== undefined && data)
+
+  console.log(info)
+
+  return (
+    <div key={key} className={styles.container}>
+      <h3>{info.title}</h3>
+      <span>{info.value}</span>
+
+      {Number(info.percent) > 0 ? (
+        <small className={styles.container__green}>{info.percent} %</small>
       ) : (
-        <small className={styles.container__red}>{percent}%</small>
+        <small className={styles.container__red}>{info.percent} %</small>
       )}
     </div>
   )
