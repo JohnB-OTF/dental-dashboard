@@ -72,7 +72,6 @@ const TableComponent = () => {
           height: "auto",
           minWidth: "100%",
         }}
-        TableColumnAlign="center"
       >
         <Table.Header columns={columns}>
           {(column) => (

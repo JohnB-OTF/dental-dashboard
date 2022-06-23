@@ -1,12 +1,20 @@
 import Head from "next/head"
 import styles from "./dashBoard.module.scss"
 
+//libraries
+import { useState } from "react"
+
 //componets
 import CardInfo from "../../Components/CardInfo/CardInfo"
 import FiltersSection from "../../Components/FiltersSection/FiltersSection"
 import TableComponent from "../../Components/TableComponent/TableComponent"
 
 const DashBoard = () => {
+  const [dateCalendar, setDateCalendar] = useState()
+  const [firstFilter, setFirstFilter] = useState()
+  const [secondFilter, setSecondFilter] = useState()
+  const [thirdFilter, setThirdFilter] = useState()
+
   //dinamic data
   const dataBoard = [
     {
@@ -68,6 +76,11 @@ const DashBoard = () => {
     },
   ]
 
+  console.log("date default", dateCalendar)
+  console.log("first filter", firstFilter)
+  console.log("second filter", secondFilter)
+  console.log("third filter", thirdFilter)
+
   return (
     <>
       <Head>
@@ -79,7 +92,12 @@ const DashBoard = () => {
       <main className={styles.main}>
         <section className={styles.main__section}>
           <div className={styles.main__section__filters}>
-            <FiltersSection />
+            <FiltersSection
+              setCalendar={setDateCalendar}
+              setFirst={setFirstFilter}
+              setSecond={setSecondFilter}
+              setThird={setThirdFilter}
+            />
           </div>
         </section>
 
@@ -88,8 +106,8 @@ const DashBoard = () => {
             <h2>New Leads</h2>
           </div>
           <div className={styles.main__section_cards}>
-            {dataBoard[0].newLeads.map((item, index) => {
-              return <CardInfo key={index} data={item} />
+            {dataBoard[0].newLeads.map((item, i) => {
+              return <CardInfo key={i + 3 * Math.random()} data={item} />
             })}
           </div>
         </section>
@@ -99,8 +117,8 @@ const DashBoard = () => {
             <h2>Response Time</h2>
           </div>
           <div className={styles.main__section_cards}>
-            {dataBoard[1].responseTime.map((item, index) => {
-              return <CardInfo key={index} data={item} />
+            {dataBoard[1].responseTime.map((item, i) => {
+              return <CardInfo key={i + 5 * Math.random()} data={item} />
             })}
           </div>
         </section>
@@ -110,8 +128,8 @@ const DashBoard = () => {
             <h2>Booking Time</h2>
           </div>
           <div className={styles.main__section_cards}>
-            {dataBoard[2].bookingTime.map((item, index) => {
-              return <CardInfo key={index} data={item} />
+            {dataBoard[2].bookingTime.map((item, i) => {
+              return <CardInfo key={i + 8 * Math.random()} data={item} />
             })}
           </div>
         </section>

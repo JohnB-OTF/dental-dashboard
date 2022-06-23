@@ -2,16 +2,16 @@
 import styles from "./filtersSection.module.scss"
 
 //libraries
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Dropdown } from "@nextui-org/react"
 
 //components
 import Calendar from "../Calendar/Calendar"
 
-const FiltersSection = () => {
+const FiltersSection = ({ setCalendar, setFirst, setSecond, setThird }) => {
   const [selected, setSelected] = useState(new Set(["Default"]))
-  const [selected2, setSelected2] = useState(new Set(["Default2"]))
-  const [selected3, setSelected3] = useState(new Set(["Default3"]))
+  const [selected2, setSelected2] = useState(new Set(["Default4"]))
+  const [selected3, setSelected3] = useState(new Set(["Default7"]))
 
   const selectedValue = useMemo(
     () => Array.from(selected).join(", ").replaceAll("_", " "),
@@ -28,14 +28,17 @@ const FiltersSection = () => {
     [selected3]
   )
 
-  console.log(selectedValue)
-  console.log(selectedValue2)
-  console.log(selectedValue3)
+  //update state when selected changes
+  useEffect(() => {
+    setFirst(selectedValue)
+    setSecond(selectedValue2)
+    setThird(selectedValue3)
+  }, [selectedValue, selectedValue2, selectedValue3])
 
   return (
     <section className={styles.container}>
       <div className={styles.container__calendar}>
-        <Calendar />
+        <Calendar setCalendar={setCalendar} />
       </div>
 
       <Dropdown>
