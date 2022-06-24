@@ -42,7 +42,7 @@ const FiltersSection = ({ setCalendar, setFirst, setSecond, setThird }) => {
       </div>
 
       <Dropdown>
-        <Dropdown.Button flat color="secondary" css={{ tt: "capitalize" }}>
+        <Dropdown.Button flat color="primary" css={{ tt: "capitalize" }}>
           {selectedValue}
         </Dropdown.Button>
         <Dropdown.Menu
@@ -60,7 +60,7 @@ const FiltersSection = ({ setCalendar, setFirst, setSecond, setThird }) => {
       </Dropdown>
 
       <Dropdown>
-        <Dropdown.Button flat color="secondary" css={{ tt: "capitalize" }}>
+        <Dropdown.Button flat color="primary" css={{ tt: "capitalize" }}>
           {selectedValue2}
         </Dropdown.Button>
         <Dropdown.Menu
@@ -78,7 +78,7 @@ const FiltersSection = ({ setCalendar, setFirst, setSecond, setThird }) => {
       </Dropdown>
 
       <Dropdown>
-        <Dropdown.Button flat color="secondary" css={{ tt: "capitalize" }}>
+        <Dropdown.Button flat color="primary" css={{ tt: "capitalize" }}>
           {selectedValue3}
         </Dropdown.Button>
         <Dropdown.Menu

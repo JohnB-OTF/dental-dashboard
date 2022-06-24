@@ -1,4 +1,5 @@
 @import "../../styles/mixin";
+@import "../../styles/variables";
 
 .main {
   width: 100%;
@@ -7,7 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgb(192, 191, 191) none repeat scroll 0% 0%;
+  background: $bg-color;
   &__section {
     margin: 1rem;
     padding: 2rem 0;
@@ -24,6 +25,10 @@
     }
     &_titles {
       text-align: center;
+      & h2 {
+        font-size: 1.8rem;
+        letter-spacing: 0.01rem;
+      }
     }
     &_cards {
       width: 100%;

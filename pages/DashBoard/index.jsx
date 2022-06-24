@@ -2,7 +2,7 @@ import Head from "next/head"
 import styles from "./dashBoard.module.scss"
 
 //libraries
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 //componets
 import CardInfo from "../../Components/CardInfo/CardInfo"
@@ -10,10 +10,17 @@ import FiltersSection from "../../Components/FiltersSection/FiltersSection"
 import TableComponent from "../../Components/TableComponent/TableComponent"
 
 const DashBoard = () => {
-  const [dateCalendar, setDateCalendar] = useState()
-  const [firstFilter, setFirstFilter] = useState()
-  const [secondFilter, setSecondFilter] = useState()
-  const [thirdFilter, setThirdFilter] = useState()
+  const [dateCalendar, setDateCalendar] = useState([])
+  const [firstFilter, setFirstFilter] = useState([])
+  const [secondFilter, setSecondFilter] = useState([])
+  const [thirdFilter, setThirdFilter] = useState([])
+
+  const [queryData, setQueryData] = useState({
+    dateRange: [],
+    first: [],
+    second: [],
+    third: [],
+  })
 
   //dinamic data
   const dataBoard = [
@@ -76,20 +83,29 @@ const DashBoard = () => {
     },
   ]
 
-  console.log("date default", dateCalendar)
-  console.log("first filter", firstFilter)
-  console.log("second filter", secondFilter)
-  console.log("third filter", thirdFilter)
+  //make  function objet data
+  const sendData = () => {
+    queryData.dateRange = dateCalendar
+    queryData.first = firstFilter
+    queryData.second = secondFilter
+    queryData.third = thirdFilter
+  }
+
+  useEffect(() => {
+    sendData()
+  }, [dateCalendar, firstFilter, secondFilter, thirdFilter])
+
+  console.log("datos para enviar", queryData)
 
   return (
     <>
       <Head>
-        <title>Dental DashBoard</title>
+        <title>DashBoard | Dentalprenr</title>
         <meta name="description" content="DashBoard Dental" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <div className={styles.main}>
         <section className={styles.main__section}>
           <div className={styles.main__section__filters}>
             <FiltersSection
@@ -143,7 +159,7 @@ const DashBoard = () => {
             <TableComponent />
           </div>
         </section>
-      </main>
+      </div>
     </>
   )
 }
