@@ -4,7 +4,7 @@
 
 **API Deploy:**
 
-### [https://pictures-viewer.herokuapp.com/](https://pictures-viewer.herokuapp.com/)
+### [url](url)
 
 ---
 
