@@ -1,34 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dentalprenr Dashboard
 
-## Getting Started
+![](https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/companyPhotos%2FA8y8JfshSL2k8ovUFqfe.png?alt=media&token=689803a3-1ebc-428a-8710-7928be8d54c2)
 
-First, run the development server:
+**API Deploy:**
+
+### [https://pictures-viewer.herokuapp.com/](https://pictures-viewer.herokuapp.com/)
+
+---
+
+## 🚀 Getting started
+
+If you want to run the site locally, you can:
+
+1. Clone the project.
+
+```bash
+https://github.com/JohnB-OTF/dental-dashboard.git
+```
+
+2. Go to project's folder
+
+```bash
+cd dental-dashboard
+```
+
+3. Install the dependencies
+
+```bash
+npm install
+```
+
+4. Run development enviroment.
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Api - Descripcion
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Coming..
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+---
 
-## Learn More
+## 🛠 Deployment
 
-To learn more about Next.js, take a look at the following resources:
+- Deploy: Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
