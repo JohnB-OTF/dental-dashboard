@@ -9,9 +9,9 @@ import { Dropdown } from "@nextui-org/react"
 import Calendar from "../Calendar/Calendar"
 
 const FiltersSection = ({ setCalendar, setFirst, setSecond, setThird }) => {
-  const [selected, setSelected] = useState(new Set(["Default"]))
-  const [selected2, setSelected2] = useState(new Set(["Default4"]))
-  const [selected3, setSelected3] = useState(new Set(["Default7"]))
+  const [selected, setSelected] = useState(new Set(["Marketing Type"]))
+  const [selected2, setSelected2] = useState(new Set(["Time of Day"]))
+  const [selected3, setSelected3] = useState(new Set(["Week Type"]))
 
   const selectedValue = useMemo(
     () => Array.from(selected).join(", ").replaceAll("_", " "),
@@ -53,9 +53,10 @@ const FiltersSection = ({ setCalendar, setFirst, setSecond, setThird }) => {
           selectedKeys={selected}
           onSelectionChange={setSelected}
         >
-          <Dropdown.Item key="data1">Data 1</Dropdown.Item>
-          <Dropdown.Item key="data2">Data 2</Dropdown.Item>
-          <Dropdown.Item key="data3">Data 3</Dropdown.Item>
+          <Dropdown.Item key="Dental marketing">
+            Dentalprenr Marketing
+          </Dropdown.Item>
+          <Dropdown.Item key="Other Marketing">Other Marketing</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
 
@@ -71,9 +72,8 @@ const FiltersSection = ({ setCalendar, setFirst, setSecond, setThird }) => {
           selectedKeys={selected2}
           onSelectionChange={setSelected2}
         >
-          <Dropdown.Item key="data4">Data 4</Dropdown.Item>
-          <Dropdown.Item key="data5">Data 5</Dropdown.Item>
-          <Dropdown.Item key="data6">Data 6</Dropdown.Item>
+          <Dropdown.Item key="business_hours">Business Hours</Dropdown.Item>
+          <Dropdown.Item key="after_hours">After Hours</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
 
@@ -89,9 +89,7 @@ const FiltersSection = ({ setCalendar, setFirst, setSecond, setThird }) => {
           selectedKeys={selected3}
           onSelectionChange={setSelected3}
         >
-          <Dropdown.Item key="data7">Data 7</Dropdown.Item>
-          <Dropdown.Item key="data8">Data 8</Dropdown.Item>
-          <Dropdown.Item key="data9">Data 9</Dropdown.Item>
+          <Dropdown.Item key="weekdays">Weekdays</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </section>

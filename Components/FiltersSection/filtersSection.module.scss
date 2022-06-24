@@ -8,3 +8,17 @@
     width: fit-content;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .container {
+    display: grid;
+    grid-template: auto / repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 428px) {
+  .container {
+    display: grid;
+    grid-template: auto / 1fr;
+  }
+}
