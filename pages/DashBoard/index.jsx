@@ -8,8 +8,10 @@ import { useEffect, useState } from "react"
 import CardInfo from "../../Components/CardInfo/CardInfo"
 import FiltersSection from "../../Components/FiltersSection/FiltersSection"
 import TableComponent from "../../Components/TableComponent/TableComponent"
+import Counter from "../../Components/Counter/Counter"
 
 const DashBoard = () => {
+  const [data, setData] = useState()
   const [dateCalendar, setDateCalendar] = useState([])
   const [firstFilter, setFirstFilter] = useState([])
   const [secondFilter, setSecondFilter] = useState([])
@@ -22,66 +24,15 @@ const DashBoard = () => {
     third: [],
   })
 
-  //dinamic data
-  const dataBoard = [
-    {
-      newLeads: [
-        {
-          title: "Leads",
-          value: "10",
-          percent: "-6.00",
-        },
-        {
-          title: "Connected",
-          value: "80",
-          percent: "4.5",
-        },
-        {
-          title: "Connected %",
-          value: "50%",
-          percent: "-6.00",
-        },
-      ],
-    },
-    {
-      responseTime: [
-        {
-          title: "5 Min Response",
-          value: "59",
-          percent: "7",
-        },
-        {
-          title: "5 Min Response %",
-          value: "59",
-          percent: "6.3",
-        },
-        {
-          title: "Avg. Response Time",
-          value: "03:12:11",
-          percent: "-11",
-        },
-      ],
-    },
-    {
-      bookingTime: [
-        {
-          title: "Same Day Booking",
-          value: "27",
-          percent: "-1.2",
-        },
-        {
-          title: "Same Day Booking %",
-          value: "38%",
-          percent: "2.4",
-        },
-        {
-          title: "avg. Time to Booking",
-          value: "17:14:12",
-          percent: "4.6",
-        },
-      ],
-    },
-  ]
+  //fetch data from api
+  useEffect(() => {
+    fetch("http://localhost:3000/api/dataBoard")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+      })
+      .catch((err) => console.log(err))
+  }, [])
 
   //make  function objet data
   const sendData = () => {
@@ -122,9 +73,10 @@ const DashBoard = () => {
             <h2>New Leads</h2>
           </div>
           <div className={styles.main__section_cards}>
-            {dataBoard[0].newLeads.map((item, i) => {
-              return <CardInfo key={i + 3 * Math.random()} data={item} />
-            })}
+            {data !== undefined &&
+              data[0].newLeads.map((item, i) => {
+                return <CardInfo key={i + 3 * Math.random()} data={item} />
+              })}
           </div>
         </section>
 
@@ -133,9 +85,10 @@ const DashBoard = () => {
             <h2>Response Time</h2>
           </div>
           <div className={styles.main__section_cards}>
-            {dataBoard[1].responseTime.map((item, i) => {
-              return <CardInfo key={i + 5 * Math.random()} data={item} />
-            })}
+            {data !== undefined &&
+              data[1].responseTime.map((item, i) => {
+                return <CardInfo key={i + 5 * Math.random()} data={item} />
+              })}
           </div>
         </section>
 
@@ -144,9 +97,10 @@ const DashBoard = () => {
             <h2>Booking Time</h2>
           </div>
           <div className={styles.main__section_cards}>
-            {dataBoard[2].bookingTime.map((item, i) => {
-              return <CardInfo key={i + 8 * Math.random()} data={item} />
-            })}
+            {data !== undefined &&
+              data[2].bookingTime.map((item, i) => {
+                return <CardInfo key={i + 8 * Math.random()} data={item} />
+              })}
           </div>
         </section>
 
