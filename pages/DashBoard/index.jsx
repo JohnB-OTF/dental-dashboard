@@ -4,6 +4,9 @@ import styles from "./dashBoard.module.scss"
 //libraries
 import { useEffect, useState } from "react"
 
+//services
+import { useGetDataQuery } from "../../services/dentalApi"
+
 //componets
 import CardInfo from "../../Components/CardInfo/CardInfo"
 import FiltersSection from "../../Components/FiltersSection/FiltersSection"
@@ -23,6 +26,12 @@ const DashBoard = () => {
     second: [],
     third: [],
   })
+
+   const { dataB, error, isLoading } = useGetDataQuery()
+
+  useEffect(() => {
+    console.log("apiData", dataB)
+  }, [dataB])
 
   //fetch data from api
   useEffect(() => {
@@ -66,6 +75,7 @@ const DashBoard = () => {
               setThird={setThirdFilter}
             />
           </div>
+          <Counter />
         </section>
 
         <section className={styles.main__section}>

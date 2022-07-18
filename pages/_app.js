@@ -1,19 +1,22 @@
 // 1. import `NextUIProvider` component
 import { NextUIProvider } from "@nextui-org/react"
-import store from "../store/store"
 import { Provider } from "react-redux"
+
+//store
+import { store } from "../store/store"
+
 //component
 import Layout from "../Components/Layout/Layout"
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <NextUIProvider>
-        <Provider store={store}>
+    <Provider store={store}>
+      <Layout>
+        <NextUIProvider>
           <Component {...pageProps} />
-        </Provider>
-      </NextUIProvider>
-    </Layout>
+        </NextUIProvider>
+      </Layout>
+    </Provider>
   )
 }
 

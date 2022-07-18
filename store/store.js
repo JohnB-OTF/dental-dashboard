@@ -1,8 +1,19 @@
+//libraries
 import { configureStore } from "@reduxjs/toolkit"
-import counterSlide from "../features/counter/counterSlice"
+import { setupListeners } from "@reduxjs/toolkit/query/react"
 
-export default configureStore({
+//services
+import counterSlide from "../features/counter/counterSlice"
+import { dentalApi } from "../services/dentalApi"
+
+export const store = configureStore({
   reducer: {
     counter: counterSlide,
+    [dentalApi.reducerPath]: dentalApi.reducer,
+  },
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().concat(dentalApi.middleware)
   },
 })
+
+setupListeners(store.dispatch)
