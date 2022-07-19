@@ -4,17 +4,15 @@ import styles from "./dashBoard.module.scss"
 //libraries
 import { useEffect, useState } from "react"
 
-//services
-import { useGetDataQuery } from "../../services/dentalApi"
-
 //componets
 import CardInfo from "../../Components/CardInfo/CardInfo"
 import FiltersSection from "../../Components/FiltersSection/FiltersSection"
 import TableComponent from "../../Components/TableComponent/TableComponent"
 import Counter from "../../Components/Counter/Counter"
+import BookingTimeComponent from "../../Components/BookingTimeComponent/BookingTimeComponent"
 
 const DashBoard = () => {
-  const [data, setData] = useState()
+  const [dataB, setDataB] = useState()
   const [dateCalendar, setDateCalendar] = useState([])
   const [firstFilter, setFirstFilter] = useState([])
   const [secondFilter, setSecondFilter] = useState([])
@@ -27,21 +25,15 @@ const DashBoard = () => {
     third: [],
   })
 
-   const { dataB, error, isLoading } = useGetDataQuery()
-
-  useEffect(() => {
-    console.log("apiData", dataB)
-  }, [dataB])
-
   //fetch data from api
-  useEffect(() => {
-    fetch("http://localhost:3000/api/dataBoard")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-      })
-      .catch((err) => console.log(err))
-  }, [])
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/api/dataBoard")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setData(data)
+  //     })
+  //     .catch((err) => console.log(err))
+  // }, [])
 
   //make  function objet data
   const sendData = () => {
@@ -54,8 +46,6 @@ const DashBoard = () => {
   useEffect(() => {
     sendData()
   }, [dateCalendar, firstFilter, secondFilter, thirdFilter])
-
-  console.log("datos para enviar", queryData)
 
   return (
     <>
@@ -75,7 +65,6 @@ const DashBoard = () => {
               setThird={setThirdFilter}
             />
           </div>
-          <Counter />
         </section>
 
         <section className={styles.main__section}>
@@ -83,8 +72,8 @@ const DashBoard = () => {
             <h2>New Leads</h2>
           </div>
           <div className={styles.main__section_cards}>
-            {data !== undefined &&
-              data[0].newLeads.map((item, i) => {
+            {dataB !== undefined &&
+              dataB[0].newLeads.map((item, i) => {
                 return <CardInfo key={i + 3 * Math.random()} data={item} />
               })}
           </div>
@@ -95,30 +84,16 @@ const DashBoard = () => {
             <h2>Response Time</h2>
           </div>
           <div className={styles.main__section_cards}>
-            {data !== undefined &&
-              data[1].responseTime.map((item, i) => {
+            {dataB !== undefined &&
+              dataB[1].responseTime.map((item, i) => {
                 return <CardInfo key={i + 5 * Math.random()} data={item} />
               })}
           </div>
         </section>
 
-        <section className={styles.main__section}>
-          <div className={styles.main__section_titles}>
-            <h2>Booking Time</h2>
-          </div>
-          <div className={styles.main__section_cards}>
-            {data !== undefined &&
-              data[2].bookingTime.map((item, i) => {
-                return <CardInfo key={i + 8 * Math.random()} data={item} />
-              })}
-          </div>
-        </section>
+        <BookingTimeComponent />
 
         <section className={styles.main__section}>
-          <div className={styles.main__section_titles}>
-            <h2>Dentalprenr Marketing</h2>
-          </div>
-
           <div className={styles.main__section__table}>
             <TableComponent />
           </div>

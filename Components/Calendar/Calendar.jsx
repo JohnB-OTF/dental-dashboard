@@ -4,12 +4,14 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
 const Calendar = ({ setCalendar }) => {
-  const [dateRange, setDateRange] = useState([new Date()])
-  const [startDate, endDate] = dateRange
+  const [currentDate, setCurrentDate] = useState([new Date()])
+  const [startDate, endDate] = currentDate
+  const [firstDay, setFirstDay] = useState()
 
   useEffect(() => {
-    setCalendar(dateRange)
-  }, [dateRange, setCalendar])
+    setCalendar(currentDate)
+    // setFirstDay(new Date(currentDate.getFullYear(), currentDate.getMonth(), 1))
+  }, [currentDate, setCalendar])
 
   return (
     <DatePicker
@@ -17,7 +19,7 @@ const Calendar = ({ setCalendar }) => {
       startDate={startDate}
       endDate={endDate}
       onChange={(update) => {
-        setDateRange(update)
+        setCurrentDate(update)
       }}
       isClearable={true}
     />
