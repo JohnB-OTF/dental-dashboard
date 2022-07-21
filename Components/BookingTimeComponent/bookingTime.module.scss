@@ -29,6 +29,9 @@
       display: flex;
       justify-content: center;
       gap: 2rem;
+      &_loader {
+        @include loader;
+      }
     }
     &__table {
       width: 100%;

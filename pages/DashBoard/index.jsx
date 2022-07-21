@@ -3,13 +3,16 @@ import styles from "./dashBoard.module.scss"
 
 //libraries
 import { useEffect, useState } from "react"
+import { Loading } from "@nextui-org/react"
 
 //componets
-import CardInfo from "../../Components/CardInfo/CardInfo"
 import FiltersSection from "../../Components/FiltersSection/FiltersSection"
 import TableComponent from "../../Components/TableComponent/TableComponent"
 import Counter from "../../Components/Counter/Counter"
 import BookingTimeComponent from "../../Components/BookingTimeComponent/BookingTimeComponent"
+
+//services
+import { useGetDataQuery } from "../../services/dentalApi"
 
 const DashBoard = () => {
   const [dataB, setDataB] = useState()
@@ -24,6 +27,11 @@ const DashBoard = () => {
     second: [],
     third: [],
   })
+
+  //call API redux service
+  const { data, isError, isLoading, isSuccess } = useGetDataQuery(
+    "pdWesjqkpBEe7oVL6SGb"
+  )
 
   //fetch data from api
   // useEffect(() => {
@@ -67,7 +75,7 @@ const DashBoard = () => {
           </div>
         </section>
 
-        <section className={styles.main__section}>
+        {/* <section className={styles.main__section}>
           <div className={styles.main__section_titles}>
             <h2>New Leads</h2>
           </div>
@@ -89,9 +97,14 @@ const DashBoard = () => {
                 return <CardInfo key={i + 5 * Math.random()} data={item} />
               })}
           </div>
-        </section>
-
-        <BookingTimeComponent />
+        </section> */}
+        {isLoading ? (
+          <div className={styles.main__loader}>
+            <Loading type="points" size="xl" color="white" />
+          </div>
+        ) : (
+          <BookingTimeComponent data={data} isSuccess={isSuccess} />
+        )}
 
         <section className={styles.main__section}>
           <div className={styles.main__section__table}>

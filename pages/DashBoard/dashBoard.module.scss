@@ -42,6 +42,9 @@
       justify-content: center;
     }
   }
+  &__loader {
+    @include loader;
+  }
 }
 
 @media only screen and (max-width: 1366px) {

@@ -2,17 +2,26 @@
 import styles from "./cardInfo.module.scss"
 
 //libraries
-import { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 const CardInfo = ({ data }) => {
   const [info, setInfo] = useState(data !== undefined && data)
 
-  console.log("info", info)
+  //reffesh data
+  useEffect(() => {
+    if (data) {
+      setInfo(data)
+    }
+  }, [data])
 
   return (
     <div className={styles.container}>
       <h3>{info.title !== undefined ? info.title : "No data"}</h3>
-      <span>{info.value !== undefined ? info.value : "No data"}</span>
+      {data !== undefined && data.isPorcent ? (
+        <span>{info.value !== undefined ? `${info.value}%` : "No data"}</span>
+      ) : (
+        <span>{info.value !== undefined ? info.value : "No data"}</span>
+      )}
 
       {Number(info.percent) > 0 ? (
         <small className={styles.container__green}>{info.percent} %</small>
@@ -23,4 +32,4 @@ const CardInfo = ({ data }) => {
   )
 }
 
-export default CardInfo
+export default React.memo(CardInfo)
