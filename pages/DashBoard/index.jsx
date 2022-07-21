@@ -2,7 +2,7 @@ import Head from "next/head"
 import styles from "./dashBoard.module.scss"
 
 //libraries
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import { Loading } from "@nextui-org/react"
 
 //componets
@@ -43,7 +43,7 @@ const DashBoard = () => {
   //     .catch((err) => console.log(err))
   // }, [])
 
-  //make  function objet data
+  //make  function objet data with usememmo
   const sendData = () => {
     queryData.dateRange = dateCalendar
     queryData.first = firstFilter
@@ -54,6 +54,8 @@ const DashBoard = () => {
   useEffect(() => {
     sendData()
   }, [dateCalendar, firstFilter, secondFilter, thirdFilter])
+
+  console.log("queryData", queryData)
 
   return (
     <>
