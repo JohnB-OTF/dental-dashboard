@@ -29,21 +29,14 @@ const DashBoard = () => {
   })
 
   //call API redux service
+  // const { data, isError, isLoading, isSuccess } = useGetDataQuery(
+  //   "pdWesjqkpBEe7oVL6SGb"
+  // )
+
   const { data, isError, isLoading, isSuccess } = useGetDataQuery(
     "pdWesjqkpBEe7oVL6SGb"
   )
 
-  //fetch data from api
-  // useEffect(() => {
-  //   fetch("http://localhost:3000/api/dataBoard")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setData(data)
-  //     })
-  //     .catch((err) => console.log(err))
-  // }, [])
-
-  //make  function objet data with usememmo
   const sendData = () => {
     queryData.dateRange = dateCalendar
     queryData.first = firstFilter
@@ -54,8 +47,6 @@ const DashBoard = () => {
   useEffect(() => {
     sendData()
   }, [dateCalendar, firstFilter, secondFilter, thirdFilter])
-
-  console.log("queryData", queryData)
 
   return (
     <>

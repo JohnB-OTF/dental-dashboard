@@ -52,15 +52,3 @@
     @include container(3%);
   }
 }
-
-@media only screen and (max-width: 768px) {
-  .main {
-    &__section {
-      padding: 2rem;
-      &_cards {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-  }
-}
