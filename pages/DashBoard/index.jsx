@@ -48,6 +48,8 @@ const DashBoard = () => {
     sendData()
   }, [dateCalendar, firstFilter, secondFilter, thirdFilter])
 
+  console.log("queryData", queryData)
+
   return (
     <>
       <Head>

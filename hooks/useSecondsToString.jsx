@@ -4,8 +4,9 @@ const useSecondsToString = (seconds) => {
   const minutes = Math.floor((seconds % 3600) / 60)
   minutes = minutes < 10 ? `0${minutes}` : minutes
   const secondsLeft = seconds % 60
-  secondsLeft = secondsLeft < 10 ? `0${secondsLeft}` : secondsLeft
-  return `${hours}:${minutes}:${secondsLeft.toFixed()}`
+  secondsLeft =
+    secondsLeft < 10 ? `0${secondsLeft.toFixed()}` : secondsLeft.toFixed()
+  return `${hours}:${minutes}:${secondsLeft}`
 }
 
 export default useSecondsToString

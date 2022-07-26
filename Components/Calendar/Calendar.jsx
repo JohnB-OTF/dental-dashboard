@@ -14,7 +14,11 @@ const Calendar = ({ setCalendar }) => {
   const [startDate, endDate] = currentDate
 
   useEffect(() => {
-    setCalendar(currentDate)
+    setCalendar(
+      currentDate !== undefined &&
+        currentDate !== null &&
+        currentDate.map((date) => date !== null && date.toUTCString())
+    )
   }, [currentDate, setCalendar])
 
   return (
