@@ -39,6 +39,9 @@
       justify-content: center;
     }
   }
+  &__loader {
+    @include loader;
+  }
 }
 
 @media screen and (max-width: 768px) {

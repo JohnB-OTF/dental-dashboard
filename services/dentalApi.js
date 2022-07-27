@@ -3,18 +3,23 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 export const dentalApi = createApi({
   reducerPath: "dentalAPI",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://dentalprenr.herokuapp.com/api/booking",
+    baseUrl: "https://dentalprenr.herokuapp.com/api",
   }),
 
   endpoints(builder) {
     return {
-      getData: builder.query({
+      getBooking: builder.query({
         query: (data) => {
-          return `/${data}`
+          return `/booking/${data}`
+        },
+      }),
+      getLeads: builder.query({
+        query: (data) => {
+          return `/leads?location=${data}`
         },
       }),
     }
   },
 })
 
-export const { useGetDataQuery } = dentalApi
+export const { useGetBookingQuery, useGetLeadsQuery } = dentalApi

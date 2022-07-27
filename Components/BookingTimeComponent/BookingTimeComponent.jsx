@@ -8,10 +8,13 @@ import { Loading } from "@nextui-org/react"
 //hooks
 import useSecondsToString from "../../hooks/useSecondsToString"
 
+//services
+import { useGetBookingQuery } from "../../services/dentalApi"
+
 //components
 import CardInfo from "../../Components/CardInfo/CardInfo"
 
-const BookingTimeComponent = ({ data, isSuccess }) => {
+const BookingTimeComponent = () => {
   const [dataBooking, setDataBooking] = useState()
   const [sameDayBooked, setSameDayBooked] = useState()
   const [porcentSameDay, setPorcentSameDay] = useState()
@@ -19,6 +22,11 @@ const BookingTimeComponent = ({ data, isSuccess }) => {
   const [getBooked, setGetBooked] = useState()
   const [getBookedSameDay, setGetBookedSameDay] = useState()
   const [getAvgTimeBooking, setGetAvgTimeBooking] = useState()
+
+  //booking end-point
+  const { data, isError, isLoading, isSuccess } = useGetBookingQuery(
+    "pdWesjqkpBEe7oVL6SGb"
+  )
 
   //convert seconds to string
   const timeAvg = useSecondsToString(totalDurationBooked)
@@ -90,39 +98,47 @@ const BookingTimeComponent = ({ data, isSuccess }) => {
 
   return (
     <>
-      <section className={styles.main__section}>
-        <div className={styles.main__section_titles}>
-          <h2>Booking Time</h2>
+      {isLoading ? (
+        <div className={styles.main__loader}>
+          <Loading type="points" size="xl" color="white" />
         </div>
-        <div className={styles.main__section_cards}>
-          {getBooked !== undefined ? (
-            <CardInfo data={getBooked} />
-          ) : (
-            <div className={styles.main__section_cards_loader}>
-              <Loading />
+      ) : (
+        <>
+          <section className={styles.main__section}>
+            <div className={styles.main__section_titles}>
+              <h2>Booking Time</h2>
             </div>
-          )}
-          {getBookedSameDay !== undefined ? (
-            <CardInfo data={getBookedSameDay} />
-          ) : (
-            <div className={styles.main__section_cards_loader}>
-              <Loading />
+            <div className={styles.main__section_cards}>
+              {getBooked !== undefined ? (
+                <CardInfo data={getBooked} />
+              ) : (
+                <div className={styles.main__section_cards_loader}>
+                  <Loading />
+                </div>
+              )}
+              {getBookedSameDay !== undefined ? (
+                <CardInfo data={getBookedSameDay} />
+              ) : (
+                <div className={styles.main__section_cards_loader}>
+                  <Loading />
+                </div>
+              )}
+              {getAvgTimeBooking !== undefined ? (
+                <CardInfo data={getAvgTimeBooking} />
+              ) : (
+                <div className={styles.main__section_cards_loader}>
+                  <Loading />
+                </div>
+              )}
             </div>
-          )}
-          {getAvgTimeBooking !== undefined ? (
-            <CardInfo data={getAvgTimeBooking} />
-          ) : (
-            <div className={styles.main__section_cards_loader}>
-              <Loading />
+          </section>
+          <section className={styles.main__section}>
+            <div className={styles.main__section_titles}>
+              <h2>Dentalprenr Marketing</h2>
             </div>
-          )}
-        </div>
-      </section>
-      <section className={styles.main__section}>
-        <div className={styles.main__section_titles}>
-          <h2>Dentalprenr Marketing</h2>
-        </div>
-      </section>
+          </section>
+        </>
+      )}
     </>
   )
 }

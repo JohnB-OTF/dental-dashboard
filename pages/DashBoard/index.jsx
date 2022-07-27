@@ -11,11 +11,7 @@ import TableComponent from "../../Components/TableComponent/TableComponent"
 import Counter from "../../Components/Counter/Counter"
 import BookingTimeComponent from "../../Components/BookingTimeComponent/BookingTimeComponent"
 
-//services
-import { useGetDataQuery } from "../../services/dentalApi"
-
 const DashBoard = () => {
-  const [dataB, setDataB] = useState()
   const [dateCalendar, setDateCalendar] = useState([])
   const [firstFilter, setFirstFilter] = useState([])
   const [secondFilter, setSecondFilter] = useState([])
@@ -33,9 +29,10 @@ const DashBoard = () => {
   //   "pdWesjqkpBEe7oVL6SGb"
   // )
 
-  const { data, isError, isLoading, isSuccess } = useGetDataQuery(
-    "pdWesjqkpBEe7oVL6SGb"
-  )
+  // //leads
+  // const leads = ({ data, isError, isLoading, isSuccess } = useGetDataQuery(
+  //   "leads?location=pdWesjqkpBEe7oVL6SGb"
+  // ))
 
   const sendData = () => {
     queryData.dateRange = dateCalendar
@@ -93,13 +90,8 @@ const DashBoard = () => {
               })}
           </div>
         </section> */}
-        {isLoading ? (
-          <div className={styles.main__loader}>
-            <Loading type="points" size="xl" color="white" />
-          </div>
-        ) : (
-          <BookingTimeComponent data={data} isSuccess={isSuccess} />
-        )}
+
+        <BookingTimeComponent />
 
         <section className={styles.main__section}>
           <div className={styles.main__section__table}>
