@@ -28,7 +28,6 @@ const BookingTimeComponent = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       setPathname(window.location.pathname)
-      console.log("pathname", pathname)
     }
   }, [pathname])
 

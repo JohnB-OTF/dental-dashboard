@@ -8,6 +8,7 @@ import { useEffect, useState, useMemo } from "react"
 import FiltersSection from "../../Components/FiltersSection/FiltersSection"
 import TableComponent from "../../Components/TableComponent/TableComponent"
 import BookingTimeComponent from "../../Components/BookingTimeComponent/BookingTimeComponent"
+import NewLeadsComponent from "../../Components/NewLeadsComponent/NewLeadsComponent"
 
 const DashBoard = () => {
   const [dateCalendar, setDateCalendar] = useState([])
@@ -88,6 +89,8 @@ const DashBoard = () => {
               })}
           </div>
         </section> */}
+
+        <NewLeadsComponent />
 
         <BookingTimeComponent />
 

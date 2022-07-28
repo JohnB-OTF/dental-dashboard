@@ -1,0 +1,57 @@
+@import "../../styles/mixin";
+@import "../../styles/variables";
+
+.main {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: $bg-color;
+  &__section {
+    margin: 1rem;
+    padding: 2rem 0;
+    width: 95%;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 2px 0px,
+      rgba(0, 0, 0, 0.2) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+    border-radius: 5px;
+    &_titles {
+      text-align: center;
+      & h2 {
+        font-size: 1.8rem;
+        letter-spacing: 0.01rem;
+      }
+    }
+    &_cards {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      &_loader {
+        @include loader;
+      }
+    }
+    &__table {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  &__loader {
+    @include loader;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    &__section {
+      padding: 2rem;
+      &_cards {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+}
