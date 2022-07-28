@@ -15,17 +15,26 @@ import { useGetBookingQuery } from "../../services/dentalApi"
 import CardInfo from "../../Components/CardInfo/CardInfo"
 
 const BookingTimeComponent = () => {
+  const [pathname, setPathname] = useState(undefined)
   const [dataBooking, setDataBooking] = useState()
   const [sameDayBooked, setSameDayBooked] = useState()
-  const [porcentSameDay, setPorcentSameDay] = useState()
+  const [porcentSameDay, setPorcentSameDay] = useState(0)
   const [totalDurationBooked, setTotalDurationBooked] = useState()
   const [getBooked, setGetBooked] = useState()
   const [getBookedSameDay, setGetBookedSameDay] = useState()
   const [getAvgTimeBooking, setGetAvgTimeBooking] = useState()
 
+  //get pathname
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setPathname(window.location.pathname)
+      console.log("pathname", pathname)
+    }
+  }, [pathname])
+
   //booking end-point
   const { data, isError, isLoading, isSuccess } = useGetBookingQuery(
-    "pdWesjqkpBEe7oVL6SGb"
+    pathname !== undefined && pathname.split("/")[2]
   )
 
   //convert seconds to string
