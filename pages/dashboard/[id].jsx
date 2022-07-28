@@ -3,12 +3,10 @@ import styles from "./dashBoard.module.scss"
 
 //libraries
 import { useEffect, useState, useMemo } from "react"
-import { Loading } from "@nextui-org/react"
 
 //componets
 import FiltersSection from "../../Components/FiltersSection/FiltersSection"
 import TableComponent from "../../Components/TableComponent/TableComponent"
-import Counter from "../../Components/Counter/Counter"
 import BookingTimeComponent from "../../Components/BookingTimeComponent/BookingTimeComponent"
 
 const DashBoard = () => {
