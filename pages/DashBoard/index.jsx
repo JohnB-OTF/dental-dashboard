@@ -2,12 +2,14 @@ import Head from "next/head"
 import styles from "./dashBoard.module.scss"
 
 //libraries
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
+import { Loading } from "@nextui-org/react"
 
 //componets
-import CardInfo from "../../Components/CardInfo/CardInfo"
 import FiltersSection from "../../Components/FiltersSection/FiltersSection"
 import TableComponent from "../../Components/TableComponent/TableComponent"
+import Counter from "../../Components/Counter/Counter"
+import BookingTimeComponent from "../../Components/BookingTimeComponent/BookingTimeComponent"
 
 const DashBoard = () => {
   const [dateCalendar, setDateCalendar] = useState([])
@@ -22,68 +24,16 @@ const DashBoard = () => {
     third: [],
   })
 
-  //dinamic data
-  const dataBoard = [
-    {
-      newLeads: [
-        {
-          title: "Leads",
-          value: "10",
-          percent: "-6.00",
-        },
-        {
-          title: "Connected",
-          value: "80",
-          percent: "4.5",
-        },
-        {
-          title: "Connected %",
-          value: "50%",
-          percent: "-6.00",
-        },
-      ],
-    },
-    {
-      responseTime: [
-        {
-          title: "5 Min Response",
-          value: "59",
-          percent: "7",
-        },
-        {
-          title: "5 Min Response %",
-          value: "59",
-          percent: "6.3",
-        },
-        {
-          title: "Avg. Response Time",
-          value: "03:12:11",
-          percent: "-11",
-        },
-      ],
-    },
-    {
-      bookingTime: [
-        {
-          title: "Same Day Booking",
-          value: "27",
-          percent: "-1.2",
-        },
-        {
-          title: "Same Day Booking %",
-          value: "38%",
-          percent: "2.4",
-        },
-        {
-          title: "avg. Time to Booking",
-          value: "17:14:12",
-          percent: "4.6",
-        },
-      ],
-    },
-  ]
+  //call API redux service
+  // const { data, isError, isLoading, isSuccess } = useGetDataQuery(
+  //   "pdWesjqkpBEe7oVL6SGb"
+  // )
 
-  //make  function objet data
+  // //leads
+  // const leads = ({ data, isError, isLoading, isSuccess } = useGetDataQuery(
+  //   "leads?location=pdWesjqkpBEe7oVL6SGb"
+  // ))
+
   const sendData = () => {
     queryData.dateRange = dateCalendar
     queryData.first = firstFilter
@@ -95,7 +45,7 @@ const DashBoard = () => {
     sendData()
   }, [dateCalendar, firstFilter, secondFilter, thirdFilter])
 
-  console.log("datos para enviar", queryData)
+  console.log("queryData", queryData)
 
   return (
     <>
@@ -117,14 +67,15 @@ const DashBoard = () => {
           </div>
         </section>
 
-        <section className={styles.main__section}>
+        {/* <section className={styles.main__section}>
           <div className={styles.main__section_titles}>
             <h2>New Leads</h2>
           </div>
           <div className={styles.main__section_cards}>
-            {dataBoard[0].newLeads.map((item, i) => {
-              return <CardInfo key={i + 3 * Math.random()} data={item} />
-            })}
+            {dataB !== undefined &&
+              dataB[0].newLeads.map((item, i) => {
+                return <CardInfo key={i + 3 * Math.random()} data={item} />
+              })}
           </div>
         </section>
 
@@ -133,28 +84,16 @@ const DashBoard = () => {
             <h2>Response Time</h2>
           </div>
           <div className={styles.main__section_cards}>
-            {dataBoard[1].responseTime.map((item, i) => {
-              return <CardInfo key={i + 5 * Math.random()} data={item} />
-            })}
+            {dataB !== undefined &&
+              dataB[1].responseTime.map((item, i) => {
+                return <CardInfo key={i + 5 * Math.random()} data={item} />
+              })}
           </div>
-        </section>
+        </section> */}
+
+        <BookingTimeComponent />
 
         <section className={styles.main__section}>
-          <div className={styles.main__section_titles}>
-            <h2>Booking Time</h2>
-          </div>
-          <div className={styles.main__section_cards}>
-            {dataBoard[2].bookingTime.map((item, i) => {
-              return <CardInfo key={i + 8 * Math.random()} data={item} />
-            })}
-          </div>
-        </section>
-
-        <section className={styles.main__section}>
-          <div className={styles.main__section_titles}>
-            <h2>Dentalprenr Marketing</h2>
-          </div>
-
           <div className={styles.main__section__table}>
             <TableComponent />
           </div>

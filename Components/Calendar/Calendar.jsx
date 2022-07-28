@@ -3,13 +3,23 @@ import { useEffect, useState } from "react"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
+//hooks
+import useGetFirstDayMonth from "../../hooks/useGetFirstDayMonth"
+
 const Calendar = ({ setCalendar }) => {
-  const [dateRange, setDateRange] = useState([new Date()])
-  const [startDate, endDate] = dateRange
+  const [currentDate, setCurrentDate] = useState([
+    useGetFirstDayMonth(),
+    new Date(),
+  ])
+  const [startDate, endDate] = currentDate
 
   useEffect(() => {
-    setCalendar(dateRange)
-  }, [dateRange, setCalendar])
+    setCalendar(
+      currentDate !== undefined &&
+        currentDate !== null &&
+        currentDate.map((date) => date !== null && date.toUTCString())
+    )
+  }, [currentDate, setCalendar])
 
   return (
     <DatePicker
@@ -17,7 +27,7 @@ const Calendar = ({ setCalendar }) => {
       startDate={startDate}
       endDate={endDate}
       onChange={(update) => {
-        setDateRange(update)
+        setCurrentDate(update)
       }}
       isClearable={true}
     />
