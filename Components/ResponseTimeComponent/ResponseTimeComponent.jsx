@@ -96,7 +96,7 @@ const BookingTimeComponent = () => {
       percent: -45,
       isPorcent: false,
     })
-  }, [dataResponseTime, ResponseTimePorcent, avgTime])
+  }, [dataResponseTime, ResponseTimePorcent, avgTime, responseTime])
 
   return (
     <>
