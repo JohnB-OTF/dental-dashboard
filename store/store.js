@@ -10,6 +10,8 @@ import { dentalApi } from "../services/dentalApi"
 import timeOfDayFilterSlice from "../slices/timeOfDayFilterSlice"
 import weekTypeFilterSlice from "../slices/weekTypeFilterSlice"
 import marketingFilterSlice from "../slices/marketingFilterSlice"
+import getDentalFilterSlice from "../slices/getDentalFilterSlice"
+import getOtherFilterSlice from "../slices/getOtherFilterSlice"
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +19,8 @@ export const store = configureStore({
     marketing: marketingFilterSlice,
     timeOfDay: timeOfDayFilterSlice,
     weekType: weekTypeFilterSlice,
+    dentalFilter: getDentalFilterSlice,
+    otherFilter: getOtherFilterSlice,
     [dentalApi.reducerPath]: dentalApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {

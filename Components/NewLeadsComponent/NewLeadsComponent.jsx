@@ -4,12 +4,17 @@ import styles from "./newLeads.module.scss"
 //libraries
 import { useEffect, useState } from "react"
 import { Loading } from "@nextui-org/react"
+import { useSelector, useDispatch } from "react-redux"
 
 //services
 import { useGetLeadsQuery } from "../../services/dentalApi"
 
 //hooks
 import useSecondsToString from "../../hooks/useSecondsToString"
+
+//slices
+import { dentalFilter } from "../../slices/getDentalFilterSlice"
+import { otherFilter } from "../../slices/getOtherFilterSlice"
 
 //components
 import CardInfo from "../CardInfo/CardInfo"
@@ -23,6 +28,8 @@ const NewLeadsComponent = () => {
   const [getConnects, setGetConnects] = useState()
   const [getConnectedPorcent, setGetConnectedPorcent] = useState()
   const [followTime, setFollowTime] = useState()
+
+  const dispatch = useDispatch()
 
   //get pathname
   useEffect(() => {
@@ -64,6 +71,24 @@ const NewLeadsComponent = () => {
     }
     setFollowTime(sum / dataLeads.data.length)
   }
+
+  //save dental marketing filters
+  useEffect(() => {
+    if (dataLeads === undefined) return
+    let filter = dataLeads.data.filter(
+      (item) => item.marketing === "Dentalprenr Marketing"
+    )
+    dispatch(dentalFilter(filter))
+  }, [dataLeads, dispatch])
+
+  //save others marketing filters
+  useEffect(() => {
+    if (dataLeads === undefined) return
+    let filter = dataLeads.data.filter(
+      (item) => item.marketing === "Other Marketing"
+    )
+    dispatch(otherFilter(filter))
+  }, [dataLeads, dispatch])
 
   //get leads elements
   useEffect(() => {
@@ -108,7 +133,6 @@ const NewLeadsComponent = () => {
   useEffect(() => {
     if (followTime === undefined) return
     sessionStorage.setItem("followup_time", timeAvg)
-    console.log("followTime", timeAvg)
   }, [followTime, timeAvg])
 
   return (

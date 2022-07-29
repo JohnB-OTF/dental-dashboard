@@ -7,18 +7,22 @@ import { Dropdown } from "@nextui-org/react"
 import { useSelector, useDispatch } from "react-redux"
 
 //slices
-import { dentalprenr, other } from "../../slices/marketingFilterSlice"
+import { dentalFilter } from "../../slices/getDentalFilterSlice"
+import { otherFilter } from "../../slices/getOtherFilterSlice"
 
 //components
 import Calendar from "../Calendar/Calendar"
 
 const FiltersSection = ({ setCalendar, setFirst, setSecond, setThird }) => {
-  const marketingFilter = useSelector((state) => state.marketing.value)
-  const dispatch = useDispatch()
-
-  const [selected, setSelected] = useState(new Set([marketingFilter]))
+  const [selected, setSelected] = useState(new Set(["test"]))
   const [selected2, setSelected2] = useState(new Set(["Time of Day"]))
   const [selected3, setSelected3] = useState(new Set(["Week Type"]))
+
+  const getDentalFilter = useSelector((state) => state.dentalFilter.value)
+  const getOtherFilter = useSelector((state) => state.otherFilter.value)
+
+  console.log("getDentalFilter", getDentalFilter)
+  console.log("getOtherFilter", getOtherFilter)
 
   const selectedValue = useMemo(
     () => Array.from(selected).join(" ,").replaceAll("_", " "),
