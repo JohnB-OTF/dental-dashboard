@@ -8,6 +8,9 @@ import { Loading } from "@nextui-org/react"
 //services
 import { useGetLeadsQuery } from "../../services/dentalApi"
 
+//hooks
+import useSecondsToString from "../../hooks/useSecondsToString"
+
 //components
 import CardInfo from "../CardInfo/CardInfo"
 
@@ -19,6 +22,7 @@ const NewLeadsComponent = () => {
   const [getLeads, setGetLeads] = useState()
   const [getConnects, setGetConnects] = useState()
   const [getConnectedPorcent, setGetConnectedPorcent] = useState()
+  const [followTime, setFollowTime] = useState()
 
   //get pathname
   useEffect(() => {
@@ -31,6 +35,9 @@ const NewLeadsComponent = () => {
   const { data, isError, isLoading, isSuccess } = useGetLeadsQuery(
     pathname !== undefined && pathname.split("/")[2]
   )
+
+  //convert seconds to string
+  const timeAvg = useSecondsToString(followTime)
 
   //filter connects elements
   const filterConnects = (dataLeads) => {
@@ -46,6 +53,16 @@ const NewLeadsComponent = () => {
       const porcent = (connects / dataLeads.data.length) * 100
       setConnectsPorcent(Number(porcent.toFixed()))
     }
+  }
+
+  //get followuptime
+  const getFollowUpTime = (dataLeads) => {
+    if (dataLeads === undefined) return
+    let sum = 0
+    for (let i = 0; i < dataLeads.data.length; i++) {
+      sum = Number(dataLeads.data[i].followuptime) + sum
+    }
+    setFollowTime(sum / dataLeads.data.length)
   }
 
   //get leads elements
@@ -66,6 +83,7 @@ const NewLeadsComponent = () => {
   //inyect data to card info
   useEffect(() => {
     if (dataLeads === undefined) return
+    getFollowUpTime(dataLeads)
     setGetLeads({
       title: "Leads",
       value: dataLeads.data.length,
@@ -85,6 +103,13 @@ const NewLeadsComponent = () => {
       isPorcent: true,
     })
   }, [dataLeads, connects, connectsPorcent])
+
+  //save data to sessionStorage
+  useEffect(() => {
+    if (followTime === undefined) return
+    sessionStorage.setItem("followup_time", timeAvg)
+    console.log("followTime", timeAvg)
+  }, [followTime, timeAvg])
 
   return (
     <>

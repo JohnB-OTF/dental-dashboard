@@ -31,3 +31,17 @@
     color: red;
   }
 }
+
+@media screen and (max-width: 1366px) {
+  .container {
+    width: 21rem;
+    padding: 2rem 4rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    width: none;
+    padding: 2rem 3rem;
+  }
+}
