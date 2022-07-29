@@ -9,17 +9,17 @@ import { Loading } from "@nextui-org/react"
 import useSecondsToString from "../../hooks/useSecondsToString"
 
 //services
-import { useGetBookingQuery } from "../../services/dentalApi"
+import { useGetResponseTimeQuery } from "../../services/dentalApi"
 
 //components
-import CardInfo from "../../Components/CardInfo/CardInfo"
+import CardInfo from "../CardInfo/CardInfo"
 
 const BookingTimeComponent = () => {
   const [pathname, setPathname] = useState(undefined)
-  const [dataBooking, setDataBooking] = useState()
-  const [sameDayBooked, setSameDayBooked] = useState()
-  const [porcentSameDay, setPorcentSameDay] = useState(0)
-  const [totalDurationBooked, setTotalDurationBooked] = useState()
+  const [dataResponseTime, setDataResponseTime] = useState()
+  const [responseTime, setResponseTime] = useState()
+  const [ResponseTimePorcent, setResponseTimePorcent] = useState(0)
+  const [avgTime, setAvgTime] = useState()
   const [getBooked, setGetBooked] = useState()
   const [getBookedSameDay, setGetBookedSameDay] = useState()
   const [getAvgTimeBooking, setGetAvgTimeBooking] = useState()
@@ -31,78 +31,72 @@ const BookingTimeComponent = () => {
     }
   }, [pathname])
 
-  //booking end-point
-  const { data, isError, isLoading, isSuccess } = useGetBookingQuery(
+  //Response time end-point
+  const { data, isError, isLoading, isSuccess } = useGetResponseTimeQuery(
     pathname !== undefined && pathname.split("/")[2]
   )
 
-  //convert seconds to string
-  const timeAvg = useSecondsToString(totalDurationBooked)
-
-  //filter sameday elements
-  const filterSameDayBooked = (dataBooking) => {
-    const elements = dataBooking.data.filter((item) => {
-      return item.samedaybooking === 1
+  //filter response elements
+  const filterResponse = (dataResponseTime) => {
+    const elements = dataResponseTime.data.filter((item) => {
+      return (
+        item.inbounds[0] !== undefined && item.inbounds[0].messages.in5min === 1
+      )
     })
-    setSameDayBooked(elements.length)
+    setResponseTime(elements.length)
   }
 
-  //porcent sameday booked
-  const porcentSameDayBooked = (sameDayBooked, dataBooking) => {
-    if (sameDayBooked !== undefined && dataBooking !== undefined) {
-      const porcent = (sameDayBooked / dataBooking.data.length) * 100
-      setPorcentSameDay(Number(porcent.toFixed()))
+  //porcent response time
+  const porcentResponseTime = (responseTime, dataResponseTime) => {
+    if (responseTime !== undefined && dataResponseTime !== undefined) {
+      const porcent = (responseTime / dataResponseTime.data.length) * 100
+      setResponseTimePorcent(Number(porcent.toFixed()))
     }
   }
 
   //avg time
-  const avgTime = (dataBooking) => {
-    if (dataBooking === undefined) return
-    let sum = 0
-    for (let i = 0; i < dataBooking.data.length; i++) {
-      sum = dataBooking.data[i].bookduration + sum
-    }
-    setTotalDurationBooked(sum / dataBooking.data.length)
+  const getAvgTime = (dataResponseTime) => {
+    setAvgTime(sessionStorage.getItem("followup_time"))
   }
 
   //get booked elements
   useEffect(() => {
     if (data === undefined) return
     if (isSuccess) {
-      setDataBooking(data)
+      setDataResponseTime(data)
     }
   }, [data, isSuccess])
 
   //get filter - porcent
   useEffect(() => {
-    if (dataBooking === undefined && sameDayBooked === undefined) return
-    filterSameDayBooked(dataBooking)
-    porcentSameDayBooked(sameDayBooked, dataBooking)
-    avgTime(dataBooking)
-  }, [dataBooking, sameDayBooked])
+    if (dataResponseTime === undefined && responseTime === undefined) return
+    filterResponse(dataResponseTime)
+    porcentResponseTime(responseTime, dataResponseTime)
+    getAvgTime(dataResponseTime)
+  }, [dataResponseTime, responseTime])
 
   //inyect data to card info
   useEffect(() => {
-    if (dataBooking === undefined) return
+    if (dataResponseTime === undefined) return
     setGetBooked({
-      title: "Booked",
-      value: dataBooking.data.length,
+      title: "5 Min Response",
+      value: responseTime,
       percent: 120,
       isPorcent: false,
     })
     setGetBookedSameDay({
-      title: "Same Day Booked %",
-      value: porcentSameDay,
+      title: "In 5 Mins %",
+      value: ResponseTimePorcent,
       percent: -45,
       isPorcent: true,
     })
     setGetAvgTimeBooking({
-      title: "Avg Time to Booking",
-      value: timeAvg,
+      title: "Avg. Response Time",
+      value: avgTime,
       percent: -45,
       isPorcent: false,
     })
-  }, [dataBooking, porcentSameDay, timeAvg])
+  }, [dataResponseTime, ResponseTimePorcent, avgTime])
 
   return (
     <>
@@ -114,7 +108,7 @@ const BookingTimeComponent = () => {
         <>
           <section className={styles.main__section}>
             <div className={styles.main__section_titles}>
-              <h2>Booking Time</h2>
+              <h2>Response Time</h2>
             </div>
             <div className={styles.main__section_cards}>
               {getBooked !== undefined ? (
@@ -138,11 +132,6 @@ const BookingTimeComponent = () => {
                   <Loading />
                 </div>
               )}
-            </div>
-          </section>
-          <section className={styles.main__section}>
-            <div className={styles.main__section_titles}>
-              <h2>Dentalprenr Marketing</h2>
             </div>
           </section>
         </>

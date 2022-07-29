@@ -18,8 +18,14 @@ export const dentalApi = createApi({
           return `/leads?location=${data}`
         },
       }),
+      getResponseTime: builder.query({
+        query: (data) => {
+          return `/leads/outbound/${data}/search`
+        },
+      }),
     }
   },
 })
 
-export const { useGetBookingQuery, useGetLeadsQuery } = dentalApi
+export const { useGetBookingQuery, useGetLeadsQuery, useGetResponseTimeQuery } =
+  dentalApi
