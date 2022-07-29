@@ -1,5 +1,5 @@
 //styles
-import styles from "./bookingTime.module.scss"
+import styles from "./responseTime.module.scss"
 
 //libraries
 import { useEffect, useState } from "react"
@@ -81,22 +81,22 @@ const BookingTimeComponent = () => {
     setGetBooked({
       title: "5 Min Response",
       value: responseTime,
-      percent: 120,
+      percent: "N/D",
       isPorcent: false,
     })
     setGetBookedSameDay({
       title: "In 5 Mins %",
       value: ResponseTimePorcent,
-      percent: -45,
+      percent: "N/D",
       isPorcent: true,
     })
     setGetAvgTimeBooking({
       title: "Avg. Response Time",
       value: avgTime,
-      percent: -45,
+      percent: "N/D",
       isPorcent: false,
     })
-  }, [dataResponseTime, ResponseTimePorcent, avgTime])
+  }, [dataResponseTime, ResponseTimePorcent, avgTime, responseTime])
 
   return (
     <>

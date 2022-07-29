@@ -31,10 +31,14 @@ const CardInfo = ({ data }) => {
         </span>
       )}
 
-      {Number(info.percent) > 0 ? (
-        <small className={styles.container__green}>{info.percent} %</small>
+      {info.percent !== "N/D" ? (
+        Number(info.percent) > 0 ? (
+          <small className={styles.container__green}>{info.percent} %</small>
+        ) : (
+          <small className={styles.container__red}>{info.percent} %</small>
+        )
       ) : (
-        <small className={styles.container__red}>{info.percent} %</small>
+        "N/D"
       )}
     </div>
   )
