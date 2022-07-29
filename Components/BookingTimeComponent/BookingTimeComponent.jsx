@@ -87,19 +87,19 @@ const BookingTimeComponent = () => {
     setGetBooked({
       title: "Booked",
       value: dataBooking.data.length,
-      percent: 120,
+      percent: "N/D",
       isPorcent: false,
     })
     setGetBookedSameDay({
       title: "Same Day Booked %",
       value: porcentSameDay,
-      percent: -45,
+      percent: "N/D",
       isPorcent: true,
     })
     setGetAvgTimeBooking({
       title: "Avg Time to Booking",
       value: timeAvg,
-      percent: -45,
+      percent: "N/D",
       isPorcent: false,
     })
   }, [dataBooking, porcentSameDay, timeAvg])
