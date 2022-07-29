@@ -87,19 +87,19 @@ const NewLeadsComponent = () => {
     setGetLeads({
       title: "Leads",
       value: dataLeads.data.length,
-      percent: 120,
+      percent: "N/D",
       isPorcent: false,
     })
     setGetConnects({
       title: "Connects",
       value: connects,
-      percent: -45,
+      percent: "N/D",
       isPorcent: false,
     })
     setGetConnectedPorcent({
       title: "Connected %",
       value: connectsPorcent,
-      percent: -45,
+      percent: "N/D",
       isPorcent: true,
     })
   }, [dataLeads, connects, connectsPorcent])

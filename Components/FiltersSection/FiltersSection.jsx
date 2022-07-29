@@ -4,17 +4,24 @@ import styles from "./filtersSection.module.scss"
 //libraries
 import { useState, useMemo, useEffect } from "react"
 import { Dropdown } from "@nextui-org/react"
+import { useSelector, useDispatch } from "react-redux"
+
+//slices
+import { dentalprenr, other } from "../../slices/marketingFilterSlice"
 
 //components
 import Calendar from "../Calendar/Calendar"
 
 const FiltersSection = ({ setCalendar, setFirst, setSecond, setThird }) => {
-  const [selected, setSelected] = useState(new Set(["Marketing Type"]))
+  const marketingFilter = useSelector((state) => state.marketing.value)
+  const dispatch = useDispatch()
+
+  const [selected, setSelected] = useState(new Set([marketingFilter]))
   const [selected2, setSelected2] = useState(new Set(["Time of Day"]))
   const [selected3, setSelected3] = useState(new Set(["Week Type"]))
 
   const selectedValue = useMemo(
-    () => Array.from(selected).join(", ").replaceAll("_", " "),
+    () => Array.from(selected).join(" ,").replaceAll("_", " "),
     [selected]
   )
 
@@ -53,10 +60,8 @@ const FiltersSection = ({ setCalendar, setFirst, setSecond, setThird }) => {
           selectedKeys={selected}
           onSelectionChange={setSelected}
         >
-          <Dropdown.Item key="Dental marketing">
-            Dentalprenr Marketing
-          </Dropdown.Item>
-          <Dropdown.Item key="Other Marketing">Other Marketing</Dropdown.Item>
+          <Dropdown.Item key="Dental_marketing">Dental marketing</Dropdown.Item>
+          <Dropdown.Item key="Other_Marketing">Other Marketing</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
 
