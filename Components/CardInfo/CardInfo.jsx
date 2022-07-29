@@ -14,8 +14,6 @@ const CardInfo = ({ data }) => {
     }
   }, [data])
 
-  console.log("info", info.value)
-
   return (
     <div className={styles.container}>
       <h3>{info.title !== undefined ? info.title : "No data"}</h3>
